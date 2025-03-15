@@ -3,10 +3,13 @@ const {
   HarmCategory,
   HarmBlockThreshold,
 } = require("@google/generative-ai");
+
 const { GoogleAIFileManager } = require("@google/generative-ai/server");
 const fs = require("fs");
+const dotenv = require("dotenv");
+dotenv.config();
 
-const apiKey = "AIzaSyAKTpbplE4A0UpgvsRNuZ1-XmGv8tEfQXQ";
+const apiKey = process.env.GKEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 const fileManager = new GoogleAIFileManager(apiKey);
 
@@ -42,8 +45,8 @@ async function run(image) {
   // TODO Make these files available on the local file system
   // You may need to update the file paths
   const files = [
-    await uploadToGemini("./t.jpg", "image/png"),
-    await uploadToGemini("./a.jpg", "image/png"),
+    await uploadToGemini("./public/t.jpg", "image/png"),
+    await uploadToGemini("./public/a.jpg", "image/png"),
   ];
 
   const chatSession = model.startChat({

@@ -1,8 +1,9 @@
 const express = require('express');
 const run = require('./ai');
 const cors = require('cors');
-const app = express();
+const path = require('path');
 
+const app = express();
 
 const PORT = process.env.PORT || 4000;
 app.use(cors());
@@ -15,7 +16,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
 app.post('/ai', async (req, res) => {
