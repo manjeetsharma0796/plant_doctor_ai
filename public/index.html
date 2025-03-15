@@ -72,7 +72,7 @@
         sendButton.addEventListener("click", function () {
             const base64String = document.getElementById("base64Output").value;
             console.log(base64String, "999999999");
-            fetch("http://localhost:4000/ai", {
+            fetch("https://plant-doctor-ai.onrender.com/ai", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
