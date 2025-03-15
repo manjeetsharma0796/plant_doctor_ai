@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Base64 Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 300px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+
+        #aians {
+            margin-top: 10px;
+            text-align: left;
+        }   
+    </style>
+</head>
+
+<body>
+
+    <h2>Convert Image to Base64</h2>
+    <input type="file" id="fileInput" accept="image/*">
+    <br>
+    <img id="imagePreview" style="display:none;">
+    <br>
+    <textarea id="base64Output" readonly></textarea>
+    <button type="button" id="toai">SEND</button>
+    <p id="aians">HERE THE DIAGONOSIS WILL APPEAR</p>
+    <script>
+        document.getElementById("fileInput").addEventListener("change", function (event) {
+            const file = event.target.files[0]; // Get the selected file
+            if (file) {
+                const reader = new FileReader();
+
+                reader.readAsDataURL(file); // Convert file to Base64
+
+                reader.onload = function () {
+                    const base64String = reader.result; // Get Base64 string
+                    console.log(base64String, "+++++++++++++++");
+                    document.getElementById("imagePreview").src = base64String; // Show image preview
+                    document.getElementById("imagePreview").style.display = "block";
+                    document.getElementById("base64Output").value = base64String; // Show Base64 string
+                };
+
+                reader.onerror = function (error) {
+                    console.error("Error reading file:", error);
+                };
+            }
+        });
+
+        const sendButton = document.getElementById("toai");
+        sendButton.addEventListener("click", function () {
+            const base64String = document.getElementById("base64Output").value;
+            console.log(base64String, "999999999");
+            fetch("http://localhost:4000/ai", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    image: base64String
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("aians").innerText = data;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        });
+    </script>
+
+</body>
+
+</html>
