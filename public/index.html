@@ -4,48 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to Base64 Converter</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-
-        input {
-            margin-bottom: 20px;
-        }
-
-        img {
-            max-width: 300px;
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 5px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-            margin-top: 10px;
-        }
-
-        #aians {
-            margin-top: 10px;
-            text-align: left;
-        }   
-    </style>
+    <title>AI for Plant Diagnosis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <h2>Convert Image to Base64</h2>
-    <input type="file" id="fileInput" accept="image/*">
-    <br>
-    <img id="imagePreview" style="display:none;">
-    <br>
-    <textarea id="base64Output" readonly></textarea>
-    <button type="button" id="toai">SEND</button>
-    <p id="aians">HERE THE DIAGONOSIS WILL APPEAR</p>
+    <div class="container">
+        <h2>P L A N T&nbsp;&nbsp;&nbsp;&nbsp;D I A G N O S I S</h2>
+        <input type="file" id="fileInput" accept="image/*">
+        <br>
+        <img id="imagePreview" style="display:none;">
+        <br>
+        <textarea id="base64Output" readonly></textarea>
+        <button type="button" id="toai">SEND</button>
+        <p id="aians">HERE THE DIAGNOSIS WILL APPEAR</p>
+    </div>
+
     <script>
         document.getElementById("fileInput").addEventListener("change", function (event) {
             const file = event.target.files[0]; // Get the selected file

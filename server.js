@@ -15,6 +15,8 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use(express.static('public')); // This allows CSS, JS, and images to be accessible
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 })

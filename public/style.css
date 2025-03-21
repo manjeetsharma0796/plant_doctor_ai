@@ -1,0 +1,124 @@
+/* Resetting some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: "Tektur", sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Container for content */
+.container {
+    background: #8ffa83;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px;
+    padding: 40px;
+    width: 100%;
+    max-width: 800px;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Heading Style */
+h2 {
+    font-size: 2rem;
+    color: #2C3E50;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+/* Input and Button Styling */
+input[type="file"] {
+    background-color: #018237;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+    background-color: #018268;
+}
+
+/* Button Styling */
+button {
+    background-color: #17b257;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #018268;
+}
+
+/* Image Preview */
+img {
+    max-width: 30%;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Textarea Styling */
+textarea {
+    width: 100%;
+    height: 120px;
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #ecf0f1;
+    resize: none;
+    color: #34495e;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* AI Response Styling */
+#aians {
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1 rem;
+    color: #49403f;
+    font-weight: bold;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="file"], button, textarea {
+        font-size: 1 rem;
+    }
+}
