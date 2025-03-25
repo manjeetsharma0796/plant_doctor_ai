@@ -70,14 +70,17 @@ nav {
 }
 
 .diagnose {
-    background:rgba(1, 247, 42, 0.743);
+    font-weight: bolder;
+    padding: 8px 16px;
+    background:rgba(1, 247, 42, 0.922);
     color: white;
     border: 1px solid white;
     margin-right: 10px;
 }
 
 .weather {
-    background: rgba(1, 247, 42, 0.743);
+    font-weight: bolder;
+    background: rgba(1, 247, 42, 0.922);
     color: white;
 }
 
@@ -89,12 +92,16 @@ nav {
 }
 
 .content h1 {
+    font-family: "Rowdies", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     font-size: 40px;
-    text-shadow: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     margin-bottom: 10px;
 }
 
 .content p {
+    font-weight: bolder;
     font-size: 18px;
     margin-bottom: 20px;
 }
