@@ -14,16 +14,17 @@
 
     <div class="container">
         <h2>P L A N T&nbsp;&nbsp;&nbsp;&nbsp;D I A G N O S I S</h2>
-        <input type="file" id="fileInput" accept="image/*">
+        <button type="button"><input type="file" id="fileInput" accept="image/*">&nbsp;Upload Image</button>
         <br>
         <img id="imagePreview" style="display:none;">
+        <!-- <textarea id="base64Output" readonly></textarea> -->
         <br>
-        <textarea id="base64Output" readonly></textarea>
-        <button type="button" id="toai">SEND</button>
-        <p id="aians">HERE THE DIAGNOSIS WILL APPEAR</p>
+        <button type="button" id="toai">Diagnose Details</button>
+        
     </div>
 
     <script>
+        let base64String=""
         document.getElementById("fileInput").addEventListener("change", function (event) {
             const file = event.target.files[0]; // Get the selected file
             if (file) {
@@ -32,11 +33,11 @@
                 reader.readAsDataURL(file); // Convert file to Base64
 
                 reader.onload = function () {
-                    const base64String = reader.result; // Get Base64 string
+                    base64String = reader.result; // Get Base64 string
                     console.log(base64String, "+++++++++++++++");
                     document.getElementById("imagePreview").src = base64String; // Show image preview
                     document.getElementById("imagePreview").style.display = "block";
-                    document.getElementById("base64Output").value = base64String; // Show Base64 string
+                    // document.getElementById("base64Output").value = base64String; // Show Base64 string
                 };
 
                 reader.onerror = function (error) {
@@ -47,7 +48,7 @@
 
         const sendButton = document.getElementById("toai");
         sendButton.addEventListener("click", function () {
-            const base64String = document.getElementById("base64Output").value;
+            // const base64String = document.getElementById("base64Output").value;
             console.log(base64String, "999999999");
             fetch("https://plant-doctor-ai.onrender.com/ai", {
                 method: "POST",
@@ -66,8 +67,8 @@
                 .catch(error => {
                     console.error("Error:", error);
                 });
-        });
-    </script>
+    });
+</script>
 
 </body>
 
