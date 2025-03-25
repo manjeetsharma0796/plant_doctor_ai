@@ -15,9 +15,12 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(express.static('public')); // This allows CSS, JS, and images to be accessible
 
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/page.html'));
+})
+
+app.get('/ai', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
@@ -30,6 +33,9 @@ app.post('/ai', async (req, res) => {
     console.log(ans);
     res.json(ans);
 })
+
+app.use(express.static('public')); // This allows CSS, JS, and images to be accessible
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port https://localhost:${PORT}`);

@@ -1,11 +1,15 @@
+/* video hatao
+nav bar lagao */
+
+
 * {
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
     box-sizing: border-box;
 }
 
 :root {
-    --primary-color: #2ecc71;
+    --primary-color: #07fd4d;
     --secondary-color: #27ae60;
     --text-color: #333;
     --bg-color: #f4f6f7;
@@ -23,29 +27,99 @@ body {
     line-height: 1.6;
 }
 
+/* Navigation Bar */
+nav {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+}
+
+.logo {
+    padding: 2px 2px;
+    background-color: rgba(251, 254, 250, 0.79);
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 65px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 20px;
+    font-family: "Rowdies", sans-serif;
+    font-weight: 300;
+    color: rgb(2, 150, 27);
+}
+
+/* Navigation Buttons */
+/* .nav-buttons button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 20px;
+} */
+
+.diagnose {
+    font-weight: bolder;
+    padding: 8px 16px;
+    font-size: 14px;
+    background: rgba(1, 247, 42, 0.922);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
 .container {
-    width: 104%;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
     max-width: 680px;
-    margin: 0 auto;
+    z-index: 10;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
 .card {
-    background: white;
+    background: rgba(255, 255, 255, 0);
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); */
     padding: 33px;
     text-align: center;
     transition: all 0.3s ease;
 }
 
-.card:hover {
+/* .card:hover {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-}
+} */
 
 h2 {
-    color: var(--primary-color);
+    font-family: "Rowdies", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(2, 150, 27);
     margin-bottom: 20px;
-    font-weight: 600;
+    font-size: xxx-large;
+    text-shadow: 2px 2px 4px rgba(149, 144, 144, 0.7);
 }
 
 .upload-section {
@@ -53,6 +127,7 @@ h2 {
 }
 
 .upload-btn {
+    font-weight: bolder;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -82,6 +157,7 @@ h2 {
 }
 
 .diagnose-btn {
+    font-weight: bolder;
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -93,7 +169,7 @@ h2 {
 }
 
 .diagnose-btn:disabled {
-    background-color: #bdc3c7;
+    background-color: #adb2b5;
     cursor: not-allowed;
 }
 
