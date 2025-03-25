@@ -4,40 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI for Plant Diagnosis</title>
+    <title>Plant Diagnosis AI</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
 
+<body>
     <div class="container">
-        <h2>P L A N T&nbsp;&nbsp;&nbsp;&nbsp;D I A G N O S I S</h2>
-        <button type="button"><input type="file" id="fileInput" accept="image/*">&nbsp;Upload Image</button>
-        <br>
-        <img id="imagePreview" style="display:none;">
-        <!-- <textarea id="base64Output" readonly></textarea> -->
-        <br>
-        <button type="button" id="toai">Diagnose Details</button>
-        
+        <div class="card">
+            <h2>Plant Diagnosis</h2>
+
+            <div class="upload-section">
+                <label for="fileInput" class="upload-btn">
+                    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                    <span class="upload-icon">+</span>
+                    Upload Image
+                </label>
+                <img id="imagePreview" class="image-preview" style="display:none;">
+            </div>
+
+            <button id="toai" class="diagnose-btn" disabled>
+                Diagnose Details
+            </button>
+
+            <div id="resultContainer" class="result-container">
+                <div class="result-header" onclick="toggleResult()">
+                    <h3>Diagnosis Result</h3>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div id="resultDetails" class="result-details">
+                    <!-- Diagnosis details will be populated here -->
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- <script src="script.js"></script> -->
     <script>
-        let base64String=""
+        let base64String = "";
+
         document.getElementById("fileInput").addEventListener("change", function (event) {
-            const file = event.target.files[0]; // Get the selected file
+            const file = event.target.files[0];
+            const diagnoseButton = document.getElementById("toai");
+
             if (file) {
                 const reader = new FileReader();
 
-                reader.readAsDataURL(file); // Convert file to Base64
+                reader.readAsDataURL(file);
 
                 reader.onload = function () {
-                    base64String = reader.result; // Get Base64 string
-                    console.log(base64String, "+++++++++++++++");
-                    document.getElementById("imagePreview").src = base64String; // Show image preview
+                    base64String = reader.result;
+                    document.getElementById("imagePreview").src = base64String;
                     document.getElementById("imagePreview").style.display = "block";
-                    // document.getElementById("base64Output").value = base64String; // Show Base64 string
+
+                    // Enable diagnose button
+                    diagnoseButton.disabled = false;
                 };
 
                 reader.onerror = function (error) {
@@ -48,8 +71,6 @@
 
         const sendButton = document.getElementById("toai");
         sendButton.addEventListener("click", function () {
-            // const base64String = document.getElementById("base64Output").value;
-            console.log(base64String, "999999999");
             fetch("https://plant-doctor-ai.onrender.com/ai", {
                 method: "POST",
                 headers: {
@@ -61,15 +82,58 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
-                    document.getElementById("aians").innerText = data;
+                    const c = data.replace(/```json|```/g, "").trim()
+                    const cleanedText = JSON.parse(c)
+                    console.log(cleanedText);
+
+                    populateResults(cleanedText);
                 })
                 .catch(error => {
                     console.error("Error:", error);
                 });
-    });
-</script>
+        });
 
+        function populateResults(data) {
+            const resultDetails = document.getElementById("resultDetails");
+            const resultContainer = document.getElementById("resultContainer");
+
+            // Diagnosis Details
+            resultDetails.innerHTML = `
+        <h4>Problem Diagnosis</h4>
+        <p><strong>Condition:</strong> ${data.diagnosis.disease}</p>
+        <p><strong>Confidence:</strong> ${data.diagnosis.confidence * 100}%</p>
+
+        <h4>Symptoms</h4>
+        <ul>
+            ${data.diagnosis.symptoms.map(symptom => `<li>${symptom}</li>`).join('')}
+        </ul>
+
+        <h4>Preventive Measures</h4>
+        <ul>
+            ${data.recommendations.preventive_measures.map(measure => `<li>${measure}</li>`).join('')}
+        </ul>
+
+        <h4>Treatment</h4>
+        ${data.recommendations.treatment.map(treatment => `
+            <h5>${treatment.type}</h5>
+<ul>
+    ${treatment.instructions && Array.isArray(treatment.instructions) && treatment.instructions.length > 0 ?
+                    treatment.instructions.map(instruction => `<li>${instruction}</li>`).join('') :
+                    (treatment.materials && Array.isArray(treatment.materials) && treatment.materials.length > 0 ?
+                        treatment.materials.map(option => `<li>${option}</li>`).join('') : ''
+                    )
+                }
+</ul>
+
+        `).join('')}
+    `;
+        }
+
+        function toggleResult() {
+            const resultContainer = document.getElementById("resultContainer");
+            resultContainer.classList.toggle("expanded");
+        }
+    </script>
 </body>
 
 </html>
