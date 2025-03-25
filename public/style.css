@@ -1,124 +1,154 @@
-/* Resetting some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body Styling */
+:root {
+    --primary-color: #2ecc71;
+    --secondary-color: #27ae60;
+    --text-color: #333;
+    --bg-color: #f4f6f7;
+}
+
 body {
-    font-family: "Tektur", sans-serif;
-    background: #f0f4f8;
-    color: #333;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
     padding: 20px;
+    line-height: 1.6;
 }
 
-/* Container for content */
 .container {
-    background: #8ffa83;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px;
-    padding: 40px;
-    width: 100%;
-    max-width: 800px;
-    transition: transform 0.3s ease;
+    width: 104%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 33px;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
-.container:hover {
-    transform: scale(1.02);
+.card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading Style */
 h2 {
-    font-size: 2rem;
-    color: #2C3E50;
-    margin-bottom: 25px;
-    font-weight: bold;
-}
-
-/* Input and Button Styling */
-input[type="file"] {
-    background-color: #018237;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    width: 100%;
+    color: var(--primary-color);
     margin-bottom: 20px;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
 }
 
-input[type="file"]:hover {
-    background-color: #018268;
+.upload-section {
+    margin-bottom: 20px;
 }
 
-/* Button Styling */
-button {
-    background-color: #17b257;
+.upload-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
     color: white;
     padding: 12px 20px;
-    border: none;
     border-radius: 8px;
-    font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    gap: 10px;
 }
 
-button:hover {
-    background-color: #018268;
+.upload-btn:hover {
+    background-color: var(--secondary-color);
 }
 
-/* Image Preview */
-img {
-    max-width: 30%;
-    margin-top: 20px;
-    border-radius: 10px;
+.upload-icon {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.image-preview {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Textarea Styling */
-textarea {
-    width: 100%;
-    height: 120px;
-    margin-top: 20px;
-    padding: 12px;
-    font-size: 1rem;
+.diagnose-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #ecf0f1;
-    resize: none;
-    color: #34495e;
-    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
 }
 
-/* AI Response Styling */
-#aians {
-    margin-top: 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1 rem;
-    color: #49403f;
-    font-weight: bold;
+.diagnose-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
 }
 
-/* Mobile Responsiveness */
+.result-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    max-height: 60px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.result-container.expanded {
+    max-height: 600px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.result-header h3 {
+    color: var(--text-color);
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.result-container.expanded .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.result-details {
+    padding: 15px;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.result-details h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.result-details ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
 @media (max-width: 600px) {
-    .container {
-        padding: 25px;
-        width: 100%;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    input[type="file"], button, textarea {
-        font-size: 1 rem;
+    .card {
+        padding: 20px;
     }
 }

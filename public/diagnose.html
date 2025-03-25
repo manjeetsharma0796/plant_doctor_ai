@@ -1,0 +1,31 @@
+<!-- diagnosis.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Details</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Diagnosis Details</h2>
+        <p id="diagnosisDetails">Loading...</p>
+    </div>
+
+    <script>
+        // Get the diagnosis details passed via URL parameter (or localStorage)
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const diagnosis = urlParams.get('diagnosis'); // Get diagnosis from query parameter
+            if (diagnosis) {
+                document.getElementById("diagnosisDetails").innerText = diagnosis;
+            } else {
+                document.getElementById("diagnosisDetails").innerText = "No diagnosis available.";
+            }
+        };
+    </script>
+</body>
+
+</html>
